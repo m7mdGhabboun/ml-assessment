@@ -1,0 +1,16 @@
+Train rows: 38,477 raw / 37,946 after dropping outliers
+Eval rows (Sep-Oct): 9,523, of which 144 are rate outliers
+Cleaning report (eval fold): {'weight_negative_fixed': 59, 'weight_imputed': 65, 'market_index_imputed': 73}
+                                    MAE all  MAE typical  MAPE typical %
+A. raw (no cleaning)                 132.21        76.70            3.32
+B. + fix weight sign, impute nulls   131.81        76.32            3.29
+C. + drop rate outliers from train   117.02        61.26            2.58
+D. C + quote_signal (what if?)       114.13        58.34            2.42
+
+MAE typical by eval month:
+  C. {9: 66.3, 10: 56.4}
+  D. {9: 62.2, 10: 54.6}
+
+Noise-regime test (train Jan-Jul, evaluate Aug):
+  without quote_signal   {'MAE all': 84.25, 'MAE typical': 34.07, 'MAPE typical %': 1.54}
+  with quote_signal      {'MAE all': 112.3, 'MAE typical': 62.75, 'MAPE typical %': 2.83}
